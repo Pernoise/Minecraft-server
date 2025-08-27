@@ -1,18 +1,14 @@
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre
 
-# Set working directory
 WORKDIR /server
 
-# Copy server files
-COPY ./paper.jar ./server.jar
+ADD https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/416/downloads/paper-1.21.4-416.jar server.jar
+
 COPY ./eula.txt .
 COPY ./start.sh .
 
-# Make start.sh executable
 RUN chmod +x ./start.sh
 
-# Expose Minecraft default port
 EXPOSE 25565
 
-# Run start script
 CMD ["./start.sh"]
